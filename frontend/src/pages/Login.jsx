@@ -1,5 +1,8 @@
 import Logo from "../assets/Logo.png";
 import Form from "../components/Form/form.jsx";
+import { login } from "../api/auth.js";
+
+
 
 const form_schema = [
     { name: "Username", label: "Username", type: "text" },
@@ -7,6 +10,19 @@ const form_schema = [
 ];
 
 export default function Login() {
+
+    const onSubmit = async (formData) => {
+
+        try {
+            /* Make an API call to backend */
+            const response = await login(formData);
+
+            console.log(response);
+
+        } catch (error) {
+            console.log(error);
+        }
+    }
 
 
     return (
@@ -20,7 +36,7 @@ export default function Login() {
                 </div>
 
                 <div className="w-full sm:w-100">
-                    <Form fields={form_schema} onSubmit={null} OkText="Log in" />
+                    <Form fields={form_schema} onSubmit={onSubmit} OkText="Log in" />
                 </div>
 
             </div>
